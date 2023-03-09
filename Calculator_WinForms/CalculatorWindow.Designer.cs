@@ -1,6 +1,6 @@
 ﻿namespace Calculator_WinForms
 {
-    partial class Calculator
+    partial class CalculatorWindow
     {
         /// <summary>
         /// Required designer variable.
@@ -30,6 +30,7 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
+            this.MainNumber = new System.Windows.Forms.Label();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.button20 = new System.Windows.Forms.Button();
             this.button19 = new System.Windows.Forms.Button();
@@ -51,18 +52,34 @@
             this.button3 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
+            this.AdditionalNumber = new System.Windows.Forms.Label();
+            this.panel1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.LightSkyBlue;
+            this.panel1.Controls.Add(this.AdditionalNumber);
+            this.panel1.Controls.Add(this.MainNumber);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Margin = new System.Windows.Forms.Padding(0);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(434, 108);
             this.panel1.TabIndex = 0;
+            // 
+            // MainNumber
+            // 
+            this.MainNumber.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.MainNumber.BackColor = System.Drawing.Color.Transparent;
+            this.MainNumber.Font = new System.Drawing.Font("Microsoft Sans Serif", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.MainNumber.Location = new System.Drawing.Point(72, 41);
+            this.MainNumber.Name = "MainNumber";
+            this.MainNumber.Size = new System.Drawing.Size(362, 59);
+            this.MainNumber.TabIndex = 0;
+            this.MainNumber.Text = "0";
+            this.MainNumber.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // tableLayoutPanel1
             // 
@@ -119,8 +136,10 @@
             this.button20.Name = "button20";
             this.button20.Size = new System.Drawing.Size(84, 88);
             this.button20.TabIndex = 20;
+            this.button20.Tag = "result";
             this.button20.Text = "=";
             this.button20.UseVisualStyleBackColor = false;
+            this.button20.Click += new System.EventHandler(this.HandleRegularButton);
             // 
             // button19
             // 
@@ -136,8 +155,10 @@
             this.button19.Name = "button19";
             this.button19.Size = new System.Drawing.Size(80, 88);
             this.button19.TabIndex = 19;
+            this.button19.Tag = "add";
             this.button19.Text = "+";
             this.button19.UseVisualStyleBackColor = false;
+            this.button19.Click += new System.EventHandler(this.HandleRegularButton);
             // 
             // button18
             // 
@@ -153,8 +174,10 @@
             this.button18.Name = "button18";
             this.button18.Size = new System.Drawing.Size(80, 88);
             this.button18.TabIndex = 18;
+            this.button18.Tag = "dot";
             this.button18.Text = ".";
             this.button18.UseVisualStyleBackColor = false;
+            this.button18.Click += new System.EventHandler(this.HandleRegularButton);
             // 
             // button17
             // 
@@ -170,8 +193,10 @@
             this.button17.Name = "button17";
             this.button17.Size = new System.Drawing.Size(80, 88);
             this.button17.TabIndex = 17;
+            this.button17.Tag = "sign";
             this.button17.Text = "±";
             this.button17.UseVisualStyleBackColor = false;
+            this.button17.Click += new System.EventHandler(this.HandleRegularButton);
             // 
             // button16
             // 
@@ -187,8 +212,10 @@
             this.button16.Name = "button16";
             this.button16.Size = new System.Drawing.Size(80, 88);
             this.button16.TabIndex = 16;
+            this.button16.Tag = "0";
             this.button16.Text = "0";
             this.button16.UseVisualStyleBackColor = false;
+            this.button16.Click += new System.EventHandler(this.HandleRegularButton);
             // 
             // button15
             // 
@@ -204,8 +231,10 @@
             this.button15.Name = "button15";
             this.button15.Size = new System.Drawing.Size(84, 88);
             this.button15.TabIndex = 15;
+            this.button15.Tag = "reflect";
             this.button15.Text = "1/x";
             this.button15.UseVisualStyleBackColor = false;
+            this.button15.Click += new System.EventHandler(this.HandleRegularButton);
             // 
             // button14
             // 
@@ -221,8 +250,10 @@
             this.button14.Name = "button14";
             this.button14.Size = new System.Drawing.Size(80, 88);
             this.button14.TabIndex = 14;
+            this.button14.Tag = "substract";
             this.button14.Text = "-";
             this.button14.UseVisualStyleBackColor = false;
+            this.button14.Click += new System.EventHandler(this.HandleRegularButton);
             // 
             // button13
             // 
@@ -238,8 +269,10 @@
             this.button13.Name = "button13";
             this.button13.Size = new System.Drawing.Size(80, 88);
             this.button13.TabIndex = 13;
+            this.button13.Tag = "3";
             this.button13.Text = "3";
             this.button13.UseVisualStyleBackColor = false;
+            this.button13.Click += new System.EventHandler(this.HandleRegularButton);
             // 
             // button12
             // 
@@ -255,8 +288,10 @@
             this.button12.Name = "button12";
             this.button12.Size = new System.Drawing.Size(80, 88);
             this.button12.TabIndex = 12;
+            this.button12.Tag = "2";
             this.button12.Text = "2";
             this.button12.UseVisualStyleBackColor = false;
+            this.button12.Click += new System.EventHandler(this.HandleRegularButton);
             // 
             // button11
             // 
@@ -272,6 +307,7 @@
             this.button11.Name = "button11";
             this.button11.Size = new System.Drawing.Size(80, 88);
             this.button11.TabIndex = 11;
+            this.button11.Tag = "1";
             this.button11.Text = "1";
             this.button11.UseVisualStyleBackColor = false;
             this.button11.Click += new System.EventHandler(this.HandleRegularButton);
@@ -290,8 +326,10 @@
             this.button10.Name = "button10";
             this.button10.Size = new System.Drawing.Size(84, 88);
             this.button10.TabIndex = 10;
+            this.button10.Tag = "remainder";
             this.button10.Text = "%";
             this.button10.UseVisualStyleBackColor = false;
+            this.button10.Click += new System.EventHandler(this.HandleRegularButton);
             // 
             // button9
             // 
@@ -307,8 +345,10 @@
             this.button9.Name = "button9";
             this.button9.Size = new System.Drawing.Size(80, 88);
             this.button9.TabIndex = 9;
+            this.button9.Tag = "multiply";
             this.button9.Text = "*";
             this.button9.UseVisualStyleBackColor = false;
+            this.button9.Click += new System.EventHandler(this.HandleRegularButton);
             // 
             // button8
             // 
@@ -324,8 +364,10 @@
             this.button8.Name = "button8";
             this.button8.Size = new System.Drawing.Size(80, 88);
             this.button8.TabIndex = 8;
+            this.button8.Tag = "6";
             this.button8.Text = "6";
             this.button8.UseVisualStyleBackColor = false;
+            this.button8.Click += new System.EventHandler(this.HandleRegularButton);
             // 
             // button7
             // 
@@ -341,8 +383,10 @@
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(80, 88);
             this.button7.TabIndex = 7;
+            this.button7.Tag = "5";
             this.button7.Text = "5";
             this.button7.UseVisualStyleBackColor = false;
+            this.button7.Click += new System.EventHandler(this.HandleRegularButton);
             // 
             // button6
             // 
@@ -358,8 +402,10 @@
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(80, 88);
             this.button6.TabIndex = 6;
+            this.button6.Tag = "4";
             this.button6.Text = "4";
             this.button6.UseVisualStyleBackColor = false;
+            this.button6.Click += new System.EventHandler(this.HandleRegularButton);
             // 
             // button5
             // 
@@ -375,8 +421,10 @@
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(84, 88);
             this.button5.TabIndex = 5;
+            this.button5.Tag = "sqrt";
             this.button5.Text = "√";
             this.button5.UseVisualStyleBackColor = false;
+            this.button5.Click += new System.EventHandler(this.HandleRegularButton);
             // 
             // button4
             // 
@@ -392,8 +440,10 @@
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(80, 88);
             this.button4.TabIndex = 4;
+            this.button4.Tag = "divide";
             this.button4.Text = "÷";
             this.button4.UseVisualStyleBackColor = false;
+            this.button4.Click += new System.EventHandler(this.HandleRegularButton);
             // 
             // button3
             // 
@@ -409,8 +459,10 @@
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(80, 88);
             this.button3.TabIndex = 3;
+            this.button3.Tag = "9";
             this.button3.Text = "9";
             this.button3.UseVisualStyleBackColor = false;
+            this.button3.Click += new System.EventHandler(this.HandleRegularButton);
             // 
             // button1
             // 
@@ -426,8 +478,10 @@
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(80, 88);
             this.button1.TabIndex = 2;
+            this.button1.Tag = "8";
             this.button1.Text = "8";
             this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.HandleRegularButton);
             // 
             // button2
             // 
@@ -443,10 +497,24 @@
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(80, 88);
             this.button2.TabIndex = 1;
+            this.button2.Tag = "7";
             this.button2.Text = "7";
             this.button2.UseVisualStyleBackColor = false;
+            this.button2.Click += new System.EventHandler(this.HandleRegularButton);
             // 
-            // Calculator
+            // AdditionalNumber
+            // 
+            this.AdditionalNumber.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.AdditionalNumber.BackColor = System.Drawing.Color.Transparent;
+            this.AdditionalNumber.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.AdditionalNumber.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.AdditionalNumber.Location = new System.Drawing.Point(69, 9);
+            this.AdditionalNumber.Name = "AdditionalNumber";
+            this.AdditionalNumber.Size = new System.Drawing.Size(362, 32);
+            this.AdditionalNumber.TabIndex = 1;
+            this.AdditionalNumber.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // CalculatorWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -456,9 +524,9 @@
             this.Controls.Add(this.panel1);
             this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
-            this.Name = "Calculator";
+            this.Name = "CalculatorWindow";
             this.Text = "Calculator";
-            this.Load += new System.EventHandler(this.Form1_Load);
+            this.panel1.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             this.ResumeLayout(false);
@@ -490,5 +558,7 @@
         private System.Windows.Forms.Button button8;
         private System.Windows.Forms.Button button7;
         private System.Windows.Forms.Button button6;
+        private System.Windows.Forms.Label MainNumber;
+        private System.Windows.Forms.Label AdditionalNumber;
     }
 }
