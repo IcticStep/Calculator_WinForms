@@ -1,17 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
+﻿using System.Globalization;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Calculator_WinForms
 {
-    internal class InputData
+    internal class InputContainer
     {
-        public InputData() : this(null, "0", "") { }
+        public InputContainer() : this(null, "0", "") { }
 
-        public InputData(string additionalNumber, string mainNumber, string operation) =>
+        public InputContainer(string additionalNumber, string mainNumber, string operation) =>
             (AdditionalNumber, MainNumber, Operation) = (additionalNumber, mainNumber, operation);
 
         public const int DigitsLimit = 16;
@@ -25,6 +21,11 @@ namespace Calculator_WinForms
         public bool HasAdditionalNumber => !string.IsNullOrEmpty(AdditionalNumber);
         public bool HasMainNumber => !string.IsNullOrEmpty(MainNumber);
         public bool HasBothNumbers => HasAdditionalNumber && HasMainNumber;
+
+        public void Reset() => 
+            (AdditionalNumber, MainNumber, Operation) = (null, ClearNumber, "");
+
+        public void AddDigit(string digit) => AddDigit(digit[0]);
 
         public void AddDigit(char digit)
         {
@@ -50,9 +51,6 @@ namespace Calculator_WinForms
 
             MainNumber += '.';
         }
-
-        public void AddDigit(string digit) => 
-            AddDigit(digit[0]);
 
         public void SetOperation(string operation, string operationView = null)
         {
@@ -98,12 +96,7 @@ namespace Calculator_WinForms
             AdditionalNumber = default;
         }
 
-        private bool DigitsLimitReached(string value) =>
-            value.Length >= DigitsLimit;
-
-        private bool ContainsZeroOnly(string value) => value.Length == 1 && value[0] == '0';
-
-        internal void RemoveDigit()
+        public void RemoveDigit()
         {
             if (!HasMainNumber || MainNumber.Length == 1)
             {
@@ -113,5 +106,8 @@ namespace Calculator_WinForms
 
             MainNumber = MainNumber.Substring(0, MainNumber.Length - 1);
         }
+
+        private bool DigitsLimitReached(string value) =>value.Length >= DigitsLimit;
+        private bool ContainsZeroOnly(string value) => value.Length == 1 && value[0] == '0';
     }
 }

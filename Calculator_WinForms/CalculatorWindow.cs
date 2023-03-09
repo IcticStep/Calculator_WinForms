@@ -1,11 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using static Calculator_WinForms.Commands;
 
@@ -13,19 +7,38 @@ namespace Calculator_WinForms
 {
     public partial class CalculatorWindow : Form
     {
-        private InputData _input = new InputData();
-        private Processor _processor = new Processor();
+        private readonly InputContainer _input = new InputContainer();
+        private readonly Processor _processor = new Processor();
+        private readonly Dictionary<string, Action> _commands = new Dictionary<string, Action>();
 
         private bool _resultJustSet;
 
-        public CalculatorWindow() => InitializeComponent();
+        public CalculatorWindow()
+        {
+            InitializeComponent();
+            InitializeCommands();
+        }
 
-        private void HandleRegularButton(object sender, EventArgs e)
+        private void InitializeCommands()
+        {
+            _commands.Add(ClearAll, ClearInput);
+            _commands.Add(Clear, _input.MakeClearStep);
+            _commands.Add(Backspace, _input.RemoveDigit);
+            _commands.Add(Result, CalculateResult);
+            _commands.Add(Dot, AddDot);
+        }
+
+        private void HandleButtonClick(object sender, EventArgs e)
         {
             var button = sender as Button;
             var command = button.Tag as string;
-            var text = button.Text;
+            var viewText = button.Text;
 
+            PerformCommand(command, viewText);
+        }
+
+        private void PerformCommand(string command, string viewText)
+        {
             if (IsCommandNumeric(command))
             {
                 AddDigit(command);
@@ -34,24 +47,18 @@ namespace Calculator_WinForms
 
             if (IsProccessingComand(command))
             {
-                SendProcessingComand(command, text);
+                SendProcessingComand(command, viewText);
                 return;
             }
 
-            if (command == Result)
-            {
-                CalculateResult();
-                return;
-            }
+            if(!_commands.ContainsKey(command))
+                throw new NotImplementedException();
 
-            if (command == Dot)
-            {
-                AddDot();
-                return;
-            }
-
-            throw new NotImplementedException();
+            _commands[command].Invoke();
+            UpdateView();
         }
+
+        private void ClearInput() => _input.Reset();
 
         private void AddDot()
         {
@@ -110,8 +117,7 @@ namespace Calculator_WinForms
             if (_input.HasAdditionalNumber)
                 return;
 
-            _input = new InputData();
-            
+            _input.Reset();
         }
 
         private void UpdateView()
@@ -136,26 +142,5 @@ namespace Calculator_WinForms
 
         private bool IsProccessingComand(string command) =>
             _processor.CanPerform(command);
-
-        private void Clear(object sender, EventArgs e)
-        {
-            var button = sender as Button;
-            var command = button.Tag;
-
-            switch (command)
-            {
-                case ClearAll:
-                    _input = new InputData();
-                    break;
-                case Commands.Clear:
-                    _input.MakeClearStep();
-                    break;
-                case Backspace:
-                    _input.RemoveDigit();
-                    break;
-            }
-
-            UpdateView();
-        }
     }
 }

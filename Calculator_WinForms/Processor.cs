@@ -12,15 +12,18 @@ namespace Calculator_WinForms
         private readonly Dictionary<string, Operation> _commands
             = new Dictionary<string, Operation>();
 
-        public double Procceed(in InputData inputData)
+        public double Procceed(in InputContainer inputData)
         {
-            double additional = inputData.HasAdditionalNumber ? double.Parse(inputData.AdditionalNumber, CultureInfo.InvariantCulture) : default;
+            var additional = inputData.HasAdditionalNumber 
+                ? double.Parse(inputData.AdditionalNumber, CultureInfo.InvariantCulture)
+                : default;
             var main = double.Parse(inputData.MainNumber, CultureInfo.InvariantCulture);
 
             return _commands[inputData.Operation].Perform(additional, main);
         }
 
         public bool CanPerform(string operation) => _commands.ContainsKey(operation);
+
         public bool NeedBothNumbers(string operation)
         {
             if (!CanPerform(operation))
