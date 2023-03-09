@@ -9,12 +9,13 @@ namespace Calculator_WinForms
 {
     internal class InputData
     {
-        public InputData() : this(null, "", "") { }
+        public InputData() : this(null, "0", "") { }
 
         public InputData(string additionalNumber, string mainNumber, string operation) =>
             (AdditionalNumber, MainNumber, Operation) = (additionalNumber, mainNumber, operation);
 
         public const int DigitsLimit = 16;
+        private readonly string ClearNumber = default(double).ToString(CultureInfo.InvariantCulture);
 
         public string AdditionalNumber { get; private set; }
         public string MainNumber { get; private set; } 
@@ -41,11 +42,8 @@ namespace Calculator_WinForms
 
         public void AddDot()
         {
-            if (string.IsNullOrEmpty(MainNumber))
-            {
-                MainNumber = "0.";
-                return;
-            }
+            if (!HasMainNumber)
+                ClearMainNumber();
 
             if (MainNumber.Contains('.'))
                 return;
@@ -53,9 +51,10 @@ namespace Calculator_WinForms
             MainNumber += '.';
         }
 
-        public void AddDigit(string digit) => AddDigit(digit[0]);
+        public void AddDigit(string digit) => 
+            AddDigit(digit[0]);
 
-        public void SetOperation(string operation, string operationView)
+        public void SetOperation(string operation, string operationView = null)
         {
             if (operationView is null) operationView = operation;
 
@@ -63,7 +62,22 @@ namespace Calculator_WinForms
             OperationView = operationView;
         }
 
-        public void UpdateMainNumber(double value)
+        public void ClearMainNumber() => MainNumber = ClearNumber;
+
+        public void MakeClearStep()
+        {
+            if (HasBothNumbers && MainNumber != ClearNumber)
+            {
+                ClearMainNumber();
+                return;
+            }
+
+            MainNumber = ClearNumber;
+            AdditionalNumber = default;
+            Operation = default;
+        }
+
+        public void SaveMainNumberWithReplacement(double value)
         {
             AdditionalNumber = MainNumber;
             MainNumber = value.ToString(CultureInfo.InvariantCulture);
@@ -71,7 +85,7 @@ namespace Calculator_WinForms
 
         public void SetCalculationsResult(double value)
         {
-            UpdateMainNumber(value);
+            SaveMainNumberWithReplacement(value);
             AdditionalNumber = default;
             Operation = default;
         }
@@ -88,5 +102,16 @@ namespace Calculator_WinForms
             value.Length >= DigitsLimit;
 
         private bool ContainsZeroOnly(string value) => value.Length == 1 && value[0] == '0';
+
+        internal void RemoveDigit()
+        {
+            if (!HasMainNumber || MainNumber.Length == 1)
+            {
+                ClearMainNumber();
+                return;
+            }
+
+            MainNumber = MainNumber.Substring(0, MainNumber.Length - 1);
+        }
     }
 }

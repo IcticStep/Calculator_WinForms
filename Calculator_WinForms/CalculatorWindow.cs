@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static Calculator_WinForms.Commands;
 
 namespace Calculator_WinForms
 {
@@ -37,13 +38,13 @@ namespace Calculator_WinForms
                 return;
             }
 
-            if (command == Commands.Result)
+            if (command == Result)
             {
                 CalculateResult();
                 return;
             }
 
-            if (command == Commands.Dot)
+            if (command == Dot)
             {
                 AddDot();
                 return;
@@ -66,7 +67,7 @@ namespace Calculator_WinForms
 
             if (_processor.NeedBothNumbers(_input.Operation) && !_input.HasBothNumbers)
             {
-                _input.UpdateMainNumber(0);
+                _input.SaveMainNumberWithReplacement(0);
                 UpdateView();
                 return;
             }
@@ -82,7 +83,7 @@ namespace Calculator_WinForms
             _input.SetOperation(command, text);
             if (_processor.NeedBothNumbers(_input.Operation) && !_input.HasBothNumbers)
             {
-                _input.UpdateMainNumber(0);
+                _input.SaveMainNumberWithReplacement(0);
             }
             else if (!_processor.NeedBothNumbers(_input.Operation))
             {
@@ -135,5 +136,26 @@ namespace Calculator_WinForms
 
         private bool IsProccessingComand(string command) =>
             _processor.CanPerform(command);
+
+        private void Clear(object sender, EventArgs e)
+        {
+            var button = sender as Button;
+            var command = button.Tag;
+
+            switch (command)
+            {
+                case ClearAll:
+                    _input = new InputData();
+                    break;
+                case Commands.Clear:
+                    _input.MakeClearStep();
+                    break;
+                case Backspace:
+                    _input.RemoveDigit();
+                    break;
+            }
+
+            UpdateView();
+        }
     }
 }

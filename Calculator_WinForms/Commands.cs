@@ -18,5 +18,8 @@ namespace Calculator_WinForms
         public const string Sqrt = "sqrt";
         public const string Remainder = "remainder";
         public const string Reflect = "reflect";
+        public const string Backspace = "backspace";
+        public const string ClearAll = "clearAll";
+        public const string Clear = "clear";
     }
 }

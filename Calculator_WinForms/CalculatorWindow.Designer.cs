@@ -30,8 +30,13 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
+            this.ClearPanel = new System.Windows.Forms.TableLayoutPanel();
+            this.ClearButton = new System.Windows.Forms.Button();
+            this.ClearAllButton = new System.Windows.Forms.Button();
+            this.BackspaceButton = new System.Windows.Forms.Button();
+            this.AdditionalNumber = new System.Windows.Forms.Label();
             this.MainNumber = new System.Windows.Forms.Label();
-            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.MainButtons = new System.Windows.Forms.TableLayoutPanel();
             this.button20 = new System.Windows.Forms.Button();
             this.button19 = new System.Windows.Forms.Button();
             this.button18 = new System.Windows.Forms.Button();
@@ -52,75 +57,162 @@
             this.button3 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
-            this.AdditionalNumber = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
-            this.tableLayoutPanel1.SuspendLayout();
+            this.ClearPanel.SuspendLayout();
+            this.MainButtons.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.LightSkyBlue;
+            this.panel1.Controls.Add(this.ClearPanel);
             this.panel1.Controls.Add(this.AdditionalNumber);
             this.panel1.Controls.Add(this.MainNumber);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Margin = new System.Windows.Forms.Padding(0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(434, 108);
+            this.panel1.Size = new System.Drawing.Size(434, 199);
             this.panel1.TabIndex = 0;
+            // 
+            // ClearPanel
+            // 
+            this.ClearPanel.BackColor = System.Drawing.Color.Azure;
+            this.ClearPanel.ColumnCount = 3;
+            this.ClearPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.ClearPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.ClearPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.ClearPanel.Controls.Add(this.ClearButton, 0, 0);
+            this.ClearPanel.Controls.Add(this.ClearAllButton, 0, 0);
+            this.ClearPanel.Controls.Add(this.BackspaceButton, 0, 0);
+            this.ClearPanel.Location = new System.Drawing.Point(0, 118);
+            this.ClearPanel.Name = "ClearPanel";
+            this.ClearPanel.RowCount = 1;
+            this.ClearPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.ClearPanel.Size = new System.Drawing.Size(434, 80);
+            this.ClearPanel.TabIndex = 2;
+            // 
+            // ClearButton
+            // 
+            this.ClearButton.AutoSize = true;
+            this.ClearButton.BackColor = System.Drawing.Color.LightSteelBlue;
+            this.ClearButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.ClearButton.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ClearButton.FlatAppearance.BorderSize = 0;
+            this.ClearButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.ClearButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 26.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.ClearButton.ForeColor = System.Drawing.SystemColors.InfoText;
+            this.ClearButton.Location = new System.Drawing.Point(291, 3);
+            this.ClearButton.Name = "ClearButton";
+            this.ClearButton.Size = new System.Drawing.Size(140, 74);
+            this.ClearButton.TabIndex = 14;
+            this.ClearButton.Tag = "clear";
+            this.ClearButton.Text = "C";
+            this.ClearButton.UseVisualStyleBackColor = false;
+            this.ClearButton.Click += new System.EventHandler(this.Clear);
+            // 
+            // ClearAllButton
+            // 
+            this.ClearAllButton.AutoSize = true;
+            this.ClearAllButton.BackColor = System.Drawing.Color.LightSteelBlue;
+            this.ClearAllButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.ClearAllButton.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ClearAllButton.FlatAppearance.BorderSize = 0;
+            this.ClearAllButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.ClearAllButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 26.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.ClearAllButton.ForeColor = System.Drawing.SystemColors.InfoText;
+            this.ClearAllButton.Location = new System.Drawing.Point(147, 3);
+            this.ClearAllButton.Name = "ClearAllButton";
+            this.ClearAllButton.Size = new System.Drawing.Size(138, 74);
+            this.ClearAllButton.TabIndex = 13;
+            this.ClearAllButton.Tag = "clearAll";
+            this.ClearAllButton.Text = "CE";
+            this.ClearAllButton.UseVisualStyleBackColor = false;
+            this.ClearAllButton.Click += new System.EventHandler(this.Clear);
+            // 
+            // BackspaceButton
+            // 
+            this.BackspaceButton.AutoSize = true;
+            this.BackspaceButton.BackColor = System.Drawing.Color.LightSteelBlue;
+            this.BackspaceButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.BackspaceButton.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.BackspaceButton.FlatAppearance.BorderSize = 0;
+            this.BackspaceButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BackspaceButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 26.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.BackspaceButton.ForeColor = System.Drawing.SystemColors.InfoText;
+            this.BackspaceButton.Location = new System.Drawing.Point(3, 3);
+            this.BackspaceButton.Name = "BackspaceButton";
+            this.BackspaceButton.Size = new System.Drawing.Size(138, 74);
+            this.BackspaceButton.TabIndex = 12;
+            this.BackspaceButton.Tag = "backspace";
+            this.BackspaceButton.Text = "←";
+            this.BackspaceButton.UseVisualStyleBackColor = false;
+            this.BackspaceButton.Click += new System.EventHandler(this.Clear);
+            // 
+            // AdditionalNumber
+            // 
+            this.AdditionalNumber.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.AdditionalNumber.BackColor = System.Drawing.Color.Transparent;
+            this.AdditionalNumber.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.AdditionalNumber.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.AdditionalNumber.Location = new System.Drawing.Point(72, 9);
+            this.AdditionalNumber.Name = "AdditionalNumber";
+            this.AdditionalNumber.Size = new System.Drawing.Size(362, 32);
+            this.AdditionalNumber.TabIndex = 1;
+            this.AdditionalNumber.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // MainNumber
             // 
             this.MainNumber.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.MainNumber.BackColor = System.Drawing.Color.Transparent;
             this.MainNumber.Font = new System.Drawing.Font("Microsoft Sans Serif", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.MainNumber.Location = new System.Drawing.Point(72, 41);
+            this.MainNumber.Location = new System.Drawing.Point(75, 41);
             this.MainNumber.Name = "MainNumber";
             this.MainNumber.Size = new System.Drawing.Size(362, 59);
             this.MainNumber.TabIndex = 0;
             this.MainNumber.Text = "0";
             this.MainNumber.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // tableLayoutPanel1
+            // MainButtons
             // 
-            this.tableLayoutPanel1.AutoSize = true;
-            this.tableLayoutPanel1.ColumnCount = 5;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel1.Controls.Add(this.button20, 4, 3);
-            this.tableLayoutPanel1.Controls.Add(this.button19, 3, 3);
-            this.tableLayoutPanel1.Controls.Add(this.button18, 2, 3);
-            this.tableLayoutPanel1.Controls.Add(this.button17, 1, 3);
-            this.tableLayoutPanel1.Controls.Add(this.button16, 0, 3);
-            this.tableLayoutPanel1.Controls.Add(this.button15, 4, 2);
-            this.tableLayoutPanel1.Controls.Add(this.button14, 3, 2);
-            this.tableLayoutPanel1.Controls.Add(this.button13, 2, 2);
-            this.tableLayoutPanel1.Controls.Add(this.button12, 1, 2);
-            this.tableLayoutPanel1.Controls.Add(this.button11, 0, 2);
-            this.tableLayoutPanel1.Controls.Add(this.button10, 4, 1);
-            this.tableLayoutPanel1.Controls.Add(this.button9, 3, 1);
-            this.tableLayoutPanel1.Controls.Add(this.button8, 2, 1);
-            this.tableLayoutPanel1.Controls.Add(this.button7, 1, 1);
-            this.tableLayoutPanel1.Controls.Add(this.button6, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.button5, 4, 0);
-            this.tableLayoutPanel1.Controls.Add(this.button4, 3, 0);
-            this.tableLayoutPanel1.Controls.Add(this.button3, 2, 0);
-            this.tableLayoutPanel1.Controls.Add(this.button1, 1, 0);
-            this.tableLayoutPanel1.Controls.Add(this.button2, 0, 0);
-            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 108);
-            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 5;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(434, 373);
-            this.tableLayoutPanel1.TabIndex = 1;
+            this.MainButtons.AutoSize = true;
+            this.MainButtons.ColumnCount = 5;
+            this.MainButtons.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.MainButtons.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.MainButtons.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.MainButtons.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.MainButtons.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.MainButtons.Controls.Add(this.button20, 4, 3);
+            this.MainButtons.Controls.Add(this.button19, 3, 3);
+            this.MainButtons.Controls.Add(this.button18, 2, 3);
+            this.MainButtons.Controls.Add(this.button17, 1, 3);
+            this.MainButtons.Controls.Add(this.button16, 0, 3);
+            this.MainButtons.Controls.Add(this.button15, 4, 2);
+            this.MainButtons.Controls.Add(this.button14, 3, 2);
+            this.MainButtons.Controls.Add(this.button13, 2, 2);
+            this.MainButtons.Controls.Add(this.button12, 1, 2);
+            this.MainButtons.Controls.Add(this.button11, 0, 2);
+            this.MainButtons.Controls.Add(this.button10, 4, 1);
+            this.MainButtons.Controls.Add(this.button9, 3, 1);
+            this.MainButtons.Controls.Add(this.button8, 2, 1);
+            this.MainButtons.Controls.Add(this.button7, 1, 1);
+            this.MainButtons.Controls.Add(this.button6, 0, 1);
+            this.MainButtons.Controls.Add(this.button5, 4, 0);
+            this.MainButtons.Controls.Add(this.button4, 3, 0);
+            this.MainButtons.Controls.Add(this.button3, 2, 0);
+            this.MainButtons.Controls.Add(this.button1, 1, 0);
+            this.MainButtons.Controls.Add(this.button2, 0, 0);
+            this.MainButtons.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.MainButtons.Location = new System.Drawing.Point(0, 199);
+            this.MainButtons.Name = "MainButtons";
+            this.MainButtons.RowCount = 5;
+            this.MainButtons.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.MainButtons.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.MainButtons.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.MainButtons.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.MainButtons.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.MainButtons.Size = new System.Drawing.Size(434, 371);
+            this.MainButtons.TabIndex = 1;
             // 
             // button20
             // 
@@ -502,33 +594,23 @@
             this.button2.UseVisualStyleBackColor = false;
             this.button2.Click += new System.EventHandler(this.HandleRegularButton);
             // 
-            // AdditionalNumber
-            // 
-            this.AdditionalNumber.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.AdditionalNumber.BackColor = System.Drawing.Color.Transparent;
-            this.AdditionalNumber.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.AdditionalNumber.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.AdditionalNumber.Location = new System.Drawing.Point(69, 9);
-            this.AdditionalNumber.Name = "AdditionalNumber";
-            this.AdditionalNumber.Size = new System.Drawing.Size(362, 32);
-            this.AdditionalNumber.TabIndex = 1;
-            this.AdditionalNumber.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
             // CalculatorWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.CornflowerBlue;
-            this.ClientSize = new System.Drawing.Size(434, 481);
-            this.Controls.Add(this.tableLayoutPanel1);
+            this.ClientSize = new System.Drawing.Size(434, 570);
+            this.Controls.Add(this.MainButtons);
             this.Controls.Add(this.panel1);
             this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "CalculatorWindow";
             this.Text = "Calculator";
             this.panel1.ResumeLayout(false);
-            this.tableLayoutPanel1.ResumeLayout(false);
-            this.tableLayoutPanel1.PerformLayout();
+            this.ClearPanel.ResumeLayout(false);
+            this.ClearPanel.PerformLayout();
+            this.MainButtons.ResumeLayout(false);
+            this.MainButtons.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -537,7 +619,7 @@
         #endregion
 
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private System.Windows.Forms.TableLayoutPanel MainButtons;
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button button3;
@@ -560,5 +642,9 @@
         private System.Windows.Forms.Button button6;
         private System.Windows.Forms.Label MainNumber;
         private System.Windows.Forms.Label AdditionalNumber;
+        private System.Windows.Forms.TableLayoutPanel ClearPanel;
+        private System.Windows.Forms.Button BackspaceButton;
+        private System.Windows.Forms.Button ClearButton;
+        private System.Windows.Forms.Button ClearAllButton;
     }
 }
