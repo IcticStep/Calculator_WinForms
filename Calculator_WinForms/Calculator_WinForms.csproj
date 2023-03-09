@@ -52,8 +52,9 @@
     <Compile Include="CalculatorWindow.Designer.cs">
       <DependentUpon>CalculatorWindow.cs</DependentUpon>
     </Compile>
-    <Compile Include="Commands.cs" />
-    <Compile Include="InputData.cs" />
+    <Compile Include="CommandsSettings.cs" />
+    <Compile Include="InputContainer.cs" />
+    <Compile Include="KeyDownHandler.cs" />
     <Compile Include="Processor.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

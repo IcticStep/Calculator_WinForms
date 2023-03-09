@@ -604,8 +604,10 @@
             this.Controls.Add(this.panel1);
             this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.KeyPreview = true;
             this.Name = "CalculatorWindow";
             this.Text = "Calculator";
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.HandleKeyDown);
             this.panel1.ResumeLayout(false);
             this.ClearPanel.ResumeLayout(false);
             this.ClearPanel.PerformLayout();

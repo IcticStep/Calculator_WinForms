@@ -1,43 +1,52 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
-using static Calculator_WinForms.Commands;
+using static Calculator_WinForms.CommandsSettings;
 
 namespace Calculator_WinForms
 {
     public partial class CalculatorWindow : Form
     {
-        private readonly InputContainer _input = new InputContainer();
-        private readonly Processor _processor = new Processor();
-        private readonly Dictionary<string, Action> _commands = new Dictionary<string, Action>();
-
-        private bool _resultJustSet;
-
         public CalculatorWindow()
         {
             InitializeComponent();
             InitializeCommands();
         }
 
+        private readonly InputContainer _input = new InputContainer();
+        private readonly Processor _processor = new Processor();
+        private readonly KeyDownHandler _keyDownHandler = new KeyDownHandler();
+        private readonly Dictionary<string, Action> _commands = new Dictionary<string, Action>();
+
+        private bool _resultJustSet;
+
         private void InitializeCommands()
         {
-            _commands.Add(ClearAll, ClearInput);
-            _commands.Add(Clear, _input.MakeClearStep);
-            _commands.Add(Backspace, _input.RemoveDigit);
-            _commands.Add(Result, CalculateResult);
-            _commands.Add(Dot, AddDot);
+            _commands.Add(ClearAll.Key, ClearInput);
+            _commands.Add(Clear.Key, _input.MakeClearStep);
+            _commands.Add(Backspace.Key, _input.RemoveDigit);
+            _commands.Add(Result.Key, CalculateResult);
+            _commands.Add(Dot.Key, AddDot);
         }
 
         private void HandleButtonClick(object sender, EventArgs e)
         {
             var button = sender as Button;
             var command = button.Tag as string;
-            var viewText = button.Text;
 
-            PerformCommand(command, viewText);
+            PerformCommand(command);
         }
 
-        private void PerformCommand(string command, string viewText)
+        private void HandleKeyDown(object sender, KeyEventArgs e)
+        {
+            if (!_keyDownHandler.HasBind(e.KeyCode))
+                return;
+
+            var command = _keyDownHandler.GetBindedCommand(e.KeyCode);
+            PerformCommand(command);
+        }
+
+        private void PerformCommand(string command)
         {
             if (IsCommandNumeric(command))
             {
@@ -47,7 +56,7 @@ namespace Calculator_WinForms
 
             if (IsProccessingComand(command))
             {
-                SendProcessingComand(command, viewText);
+                SendProcessingComand(command);
                 return;
             }
 
@@ -85,9 +94,9 @@ namespace Calculator_WinForms
             UpdateView();
         }
 
-        private void SendProcessingComand(string command, string text)
+        private void SendProcessingComand(string command)
         {
-            _input.SetOperation(command, text);
+            _input.SetOperation(command);
             if (_processor.NeedBothNumbers(_input.Operation) && !_input.HasBothNumbers)
             {
                 _input.SaveMainNumberWithReplacement(0);

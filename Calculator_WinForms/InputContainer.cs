@@ -1,5 +1,7 @@
-﻿using System.Globalization;
+﻿using System;
+using System.Globalization;
 using System.Linq;
+using System.Reflection;
 
 namespace Calculator_WinForms
 {
@@ -57,7 +59,7 @@ namespace Calculator_WinForms
             if (operationView is null) operationView = operation;
 
             Operation = operation;
-            OperationView = operationView;
+            OperationView = CommandsSettings.GetView(operation);
         }
 
         public void ClearMainNumber() => MainNumber = ClearNumber;

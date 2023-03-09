@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
-using static Calculator_WinForms.Commands;
+using static Calculator_WinForms.CommandsSettings;
 
 namespace Calculator_WinForms
 {
@@ -34,14 +34,14 @@ namespace Calculator_WinForms
 
         private void InitCommands()
         {
-            InitOperation(Sign, (num1, num2) => -num2, needBothNumbers: false);
-            InitOperation(Divide, (num1, num2) => num1 == 0 ? double.NaN : num1 / num2);
-            InitOperation(Multiply, (num1, num2) => num1 * num2);
-            InitOperation(Substract, (num1, num2) => num1 - num2);
-            InitOperation(Add, (num1, num2) => num1 + num2);
-            InitOperation(Sqrt, (num1, num2) => Math.Sqrt(num2), needBothNumbers: false);
-            InitOperation(Remainder, (num1, num2) => num1 % num2);
-            InitOperation(Reflect, (num1, num2) => 1 / num2, needBothNumbers: false);
+            InitOperation(Sign.Key, (num1, num2) => -num2, needBothNumbers: false);
+            InitOperation(Divide.Key, (num1, num2) => num1 == 0 ? double.NaN : num1 / num2);
+            InitOperation(Multiply.Key, (num1, num2) => num1 * num2);
+            InitOperation(Substract.Key, (num1, num2) => num1 - num2);
+            InitOperation(Add.Key, (num1, num2) => num1 + num2);
+            InitOperation(Sqrt.Key, (num1, num2) => Math.Sqrt(num2), needBothNumbers: false);
+            InitOperation(Remainder.Key, (num1, num2) => num1 % num2);
+            InitOperation(Reflect.Key, (num1, num2) => 1 / num2, needBothNumbers: false);
         }
 
         private void InitOperation(string name, Func<double, double, double> function, bool needBothNumbers = true) =>
